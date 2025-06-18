@@ -1,27 +1,42 @@
 from django.db import models
 from datetime import date
 
-class MonthlyStat(models.Model):
-    STAT_CHOICES = [
-        ('adult_cko', 'Adult Checkout'),
-        ('children_cko', 'Children CKO'),
-        ('young_adult_cko', 'Young Adult CKO'),
-        ('audiobook_cko', 'Audiobook CKO'),
-        ('dvd_cko', 'DVD CKO'),
-        ('video_game_cko', 'Video Game CKO'),
-        ('magazine_cko', 'Magazine CKO'),
-        ('lot_cko', 'Library of Things CKO'),
-        ('local_use_cko', 'Local Use CKO'),
-        ('ill_cko', 'ILL CKO'),
-    ]
-
-    stat_type = models.CharField(max_length=50, choices=STAT_CHOICES)
-    month = models.DateField()  # Use first of the month
-    value = models.PositiveIntegerField()
-
-    class Meta:
-        unique_together = ('stat_type', 'month')
-        ordering = ['-month', 'stat_type']
+class MonthYearStat(models.Model):
+    month = models.DateField() 
 
     def __str__(self):
-        return f"{self.get_stat_type_display()} - {self.month.strftime('%B %Y')}: {self.value}" 
+        return self.month.strftime('%Y-%m-%d')
+
+
+class CirculationStat(models.Model):
+    month = models.ForeignKey(MonthYearStat, on_delete=models.CASCADE)
+    STAT_CHOICES = [
+        ('adult', 'Adult'),
+        ('children', 'Children'),
+        ('young_adult', 'Young Adult'),
+        ('audiobook', 'Audiobook'),
+        ('dvd', 'DVD'),
+        ('video_game', 'Video Game'),
+        ('magazine', 'Magazine'),
+        ('lot', 'Library of Things'),
+        ('local_use', 'Local Use'),
+        ('ill', 'ILL'),
+        ('other', 'Other'),
+    ]
+
+    circ_stat_type = models.CharField(max_length=50, choices=STAT_CHOICES)
+    circ_value = models.PositiveIntegerField()
+    renewal_value = models.PositiveIntegerField()
+
+    class Meta:
+        unique_together = ('month', 'circ_stat_type')  # prevent duplicates
+        ordering = ['circ_stat_type']
+
+    def __str__(self):
+        return self.circ_stat_type
+
+class HoldStat(models.Model):
+    month = models.ForeignKey(MonthYearStat, on_delete=models.CASCADE)
+    holds_placed = models.PositiveIntegerField()
+    holds_fulfilled = models.PositiveIntegerField()
+    holds_cko = models.PositiveIntegerField()
