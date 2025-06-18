@@ -3,6 +3,7 @@ from django import forms
 from .models import MonthlyStat
 from datetime import date
 
+#this is for the model admin 
 class MonthlyStatForm(forms.ModelForm):
     class Meta:
         model = MonthlyStat
@@ -37,3 +38,7 @@ class MonthlyStatForm(forms.ModelForm):
                 )
 
         return cleaned_data
+
+#csv upload on a different page
+class CSVUploadForm(forms.Form):
+    file = forms.FileField(label='Upload CSV file')

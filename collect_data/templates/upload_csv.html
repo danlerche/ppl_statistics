@@ -1,0 +1,24 @@
+{# add base.html if you need it #}
+{# extends "base.html" #}
+
+{% block content %}
+  <h1>Upload Monthly Stats CSV</h1>
+  {% if messages %}
+    {% for message in messages %}
+      <p class="{{ message.tags }}">{{ message }}</p>
+    {% endfor %}
+  {% endif %}
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Upload</button>
+  </form>
+
+  <p><strong>CSV format:</strong> stat_type, month (YYYY-MM), value</p>
+  <pre>
+Example:
+Adult CKO,2024-05,1200
+Children CKO,2024-05,450
+  </pre>
+{% endblock %}
