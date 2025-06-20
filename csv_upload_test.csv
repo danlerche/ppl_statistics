@@ -1,0 +1,4 @@
+date,circ_stat_type,circ_value,renewal_value
+2023-05-01,adult,340,155
+2023-05-01,children,88,44
+2023-05-01,ill,44,4

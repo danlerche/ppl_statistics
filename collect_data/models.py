@@ -25,8 +25,8 @@ class CirculationStat(models.Model):
     ]
 
     circ_stat_type = models.CharField(max_length=50, choices=STAT_CHOICES)
-    circ_value = models.PositiveIntegerField()
-    renewal_value = models.PositiveIntegerField()
+    checkouts = models.PositiveIntegerField()
+    renewals = models.PositiveIntegerField()
 
     class Meta:
         unique_together = ('month', 'circ_stat_type')  # prevent duplicates

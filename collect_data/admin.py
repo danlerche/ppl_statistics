@@ -17,7 +17,7 @@ class MonthYearStatAdmin(admin.ModelAdmin):
 
 @admin.register(CirculationStat)
 class CirculationStatAdmin(admin.ModelAdmin):
-    list_display = ('month', 'circ_stat_type', 'circ_value', 'renewal_value')
+    list_display = ('month', 'circ_stat_type', 'checkouts', 'renewals')
     list_filter = (
         'circ_stat_type',
         'month',

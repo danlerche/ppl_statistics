@@ -27,8 +27,8 @@ def upload_csv_view(request):
                 try:
                     raw_date = row['date'].strip()
                     stat_type = row['circ_stat_type'].strip().lower()
-                    circ_value = int(row['circ_value'])
-                    renewal_value = int(row['renewal_value'])
+                    circulations = int(row['circulations'])
+                    renewals = int(row['renewals'])
 
                     # Normalize date to first of the month
                     parsed_date = datetime.strptime(raw_date, '%Y-%m-%d').date()
@@ -46,8 +46,8 @@ def upload_csv_view(request):
                         month=month_obj,
                         circ_stat_type=stat_type,
                         defaults={
-                            'circ_value': circ_value,
-                            'renewal_value': renewal_value
+                            'circulations': circulations,
+                            'renewals': renewals
                         }
                     )
 
