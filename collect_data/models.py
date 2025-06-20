@@ -11,6 +11,7 @@ class MonthYearStat(models.Model):
 class CirculationStat(models.Model):
     month = models.ForeignKey(MonthYearStat, on_delete=models.CASCADE)
     STAT_CHOICES = [
+        ('accessible', 'Accessible Devices'),
         ('adult', 'Adult'),
         ('children', 'Children'),
         ('young_adult', 'Young Adult'),

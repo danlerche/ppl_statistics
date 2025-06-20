@@ -1,9 +1,9 @@
-circ_stat_type;checkouts;renewals
-Adult;5804;2240
-Audiobook;150;70
-Children;5204;3229
-DVD;501;194
-ILL;208;119
-Magazines;378;222
-Talking Book;5;0
-Young Adult;431;311
+date;circ_stat_type;checkouts;renewals
+2025-05-01;accessible;5;0
+2025-05-01;adult;5804;2240
+2025-05-01;audiobook;150;70
+2025-05-01;children;5204;3229
+2025-05-01;dvd;501;194
+2025-05-01;ill;208;119
+2025-05-01;magazine;378;222
+2025-05-01;young_adult;431;311

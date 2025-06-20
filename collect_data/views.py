@@ -1,4 +1,4 @@
-import csv
+import csv, io
 from datetime import datetime
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -19,7 +19,14 @@ def upload_csv_view(request):
         if form.is_valid():
             uploaded_file = form.cleaned_data['file']
             decoded_file = uploaded_file.read().decode('utf-8').splitlines()
-            reader = csv.DictReader(decoded_file)
+            # Try to auto-detect the csv delimiter such as comma vs semicolon
+            try:
+                dialect = csv.Sniffer().sniff(decoded_file[0])
+                reader = csv.DictReader(decoded_file, dialect=dialect)
+            except csv.Error:
+                messages.error(request, "Could not detect delimiter. Please upload a valid CSV file.")
+                return redirect('upload_csv')
+
 
             created, updated = 0, 0
 
