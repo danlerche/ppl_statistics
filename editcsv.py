@@ -60,5 +60,3 @@ df = df.sort_values("circ_stat_type").reset_index(drop=True)
 df.to_csv("circ_updated.csv", index=False, sep=";")
 
 print("Final CSV saved as circ_updated.csv with merged and cleaned data.")
-
-#lot_df = pd.read_csv("lot_circ.csv", delimiter=";")
